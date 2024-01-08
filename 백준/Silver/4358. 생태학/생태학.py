@@ -6,7 +6,8 @@ def main():
     num_tree = 0        # 나무의 총 개체수
 
     while True:
-        tree = str(sys.stdin.readline().rstrip())
+        tree = str(sys.stdin.readline().strip())
+        # tree = input() # 해당 문제의 경우 명시되어 있지는 않지만 파일 입출력 형식으로 보여짐. input() 함수를 사용하면 문제 해결 못함
 
         if not tree:
             break
