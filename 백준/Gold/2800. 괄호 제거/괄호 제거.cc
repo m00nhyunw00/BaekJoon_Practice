@@ -14,7 +14,7 @@ set<string> results;
 int num = 0;
 
 void getExpressions(string input, int index, bool isRemove);
-//void getExpressions(string str, int index);
+void getExpressions(string str, int index);
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -40,20 +40,19 @@ int main() {
 //    for(int i=0; i<10;i++)
 //        cout << parentheses[i][0] << " " << parentheses[i][1] << endl;
 
+    getExpressions(input, 0);
 
-//    getExpressions(input, 0);
-//
-//    for(const auto& result : results)
-//        cout << result << "\n";
-
-    getExpressions(input, 0, true);
-    getExpressions(input, 0, false);
-
-    for(const auto& result : results) {
-        if (result == input)
-            continue;
+    for(const auto& result : results)
         cout << result << "\n";
-    }
+
+//    getExpressions(input, 0, true);
+//    getExpressions(input, 0, false);
+//
+//    for(const auto& result : results) {
+//        if (result == input)
+//            continue;
+//        cout << result << "\n";
+//    }
 
     return 0;
 }
@@ -74,39 +73,35 @@ void getExpressions(string input, int index, bool isRemove){
     }
 }
 
-//void getExpressions(string str, int index){
-//    if(index >= num){
-//        if(str == input)
-//            return;
+void getExpressions(string str, int index){
+    if(index >= num){
+        if(str == input)
+            return;
+
+        str.erase(remove(str.begin(), str.end(), 'X'), str.end());
+
+//        string result;
 //
-//        str.erase(remove(str.begin(), str.end(), 'X'), str.end());
-//
-////        string result;
-////
-////        for(const auto& item : str){
-////            if(item != 'X')
-////                result.push_back(item);
-////        }
-//
-//        results.insert(str);
-//
-//        return;
-//    }
-//
-//    string str1 = str;
-//    string str2 = str;
-//
-//    for(int i=0; i<str.size(); i++){
-//        if(i == parentheses[index][0] || i == parentheses[index][1]){
-//            str1[i] = str[i];
-//            str2[i] = 'X';
+//        for(const auto& item : str){
+//            if(item != 'X')
+//                result.push_back(item);
 //        }
-//        else{
-//            str1[i] = str[i];
-//            str2[i] = str[i];
-//        }
-//    }
-//
-//    getExpressions(str1, ++index);
-//    getExpressions(str2, index);
-//}
+
+        results.insert(str);
+
+        return;
+    }
+
+    string str1 = str;
+    string str2 = str;
+
+    for(int i=0; i<str.size(); i++){
+        if(i == parentheses[index][0] || i == parentheses[index][1]){
+            str1[i] = str[i];
+            str2[i] = 'X';
+        }
+    }
+
+    getExpressions(str1, ++index);
+    getExpressions(str2, index);
+}
