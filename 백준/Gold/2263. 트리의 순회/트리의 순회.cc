@@ -29,20 +29,16 @@ int main() {
 }
 
 void getPreorder(int inStart, int inEnd, int postStart, int postEnd) {
-    if (postStart > postEnd || inStart > inEnd)
+    if (postStart > postEnd)
         return;
-
-    int inRoot = searchRootIndex(postorder[postEnd]);
-
-    int leftTreeNum = inRoot - inStart;
-    int rightTreeNum = inEnd - inRoot;
 
     cout << postorder[postEnd] << " ";
 
-    // 왼쪽 서브트리 재귀 호출
-    getPreorder(inStart, inRoot - 1, postStart, postStart + leftTreeNum - 1);
-    // 오른쪽 서브트리 재귀 호출
-    getPreorder(inRoot + 1, inEnd, postStart + leftTreeNum, postEnd - 1);
+    int inRoot = searchRootIndex(postorder[postEnd]);
+    int leftTreeNum = inRoot - inStart;
+
+    getPreorder(inStart, inRoot - 1, postStart, postStart + leftTreeNum - 1);   // 왼쪽 서브 트리 재귀
+    getPreorder(inRoot + 1, inEnd, postStart + leftTreeNum, postEnd - 1);   // 오른쪽 서브 트리 재귀
 }
 
 
